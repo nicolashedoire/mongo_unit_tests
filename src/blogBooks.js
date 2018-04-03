@@ -5,7 +5,7 @@ const CommentSchema = require('../src/comments').schema;
 const BlogBooksSchema = new Schema({
   title: { type: String },
   summary: { type: String },
-  comment: [
+  comments: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Comment'
