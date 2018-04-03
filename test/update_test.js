@@ -28,21 +28,30 @@ describe('Test update livre', () => {
       });
   }
 
-  it("update le titre à partir de l'instance", done => {
+  it("update le titre à partir de l'instance", (done) => {
     book.set('titre', newTitle);
     assertTitle(book.save(), done);
   });
 
-  it('update le titre du livre', done => {
+  it('update le titre du livre', (done) => {
     assertTitle(Book.update({titre: 'Docker'}, {titre: newTitle}), done);
   });
 
-  it('recherche un livre par son titre et update (findOneAndUpdate)', done => {
+  it('recherche un livre par son titre et update (findOneAndUpdate)', (done) => {
     assertTitle(Book.findOneAndUpdate({titre: 'Docker'}, {titre: newTitle}), done);
   });
 
-  it('recherche un livre par son id et update (findOneAndUpdate)', done => {
+  it('recherche un livre par son id et update (findOneAndUpdate)', (done) => {
     assertTitle(Book.findByIdAndUpdate( book._id, {titre: newTitle}), done);
+  });  
+
+  it('incrément de pages sur un livre donné', (done) => {
+    Book.update({titre: 'Docker'}, {$inc: {pagesCount: 599}}).then(() => {
+        Book.findOne({titre: 'Docker'}).then((book) => {
+            assert(book.pagesCount === 599);
+            done();
+        });
+    })
   });  
 
 });
