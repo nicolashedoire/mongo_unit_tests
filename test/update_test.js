@@ -37,4 +37,12 @@ describe('Test update livre', () => {
     assertTitle(Book.update({titre: 'Docker'}, {titre: newTitle}), done);
   });
 
+  it('recherche un livre par son titre et update (findOneAndUpdate)', done => {
+    assertTitle(Book.findOneAndUpdate({titre: 'Docker'}, {titre: newTitle}), done);
+  });
+
+  it('recherche un livre par son id et update (findOneAndUpdate)', done => {
+    assertTitle(Book.findByIdAndUpdate( book._id, {titre: newTitle}), done);
+  });  
+
 });
