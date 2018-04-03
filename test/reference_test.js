@@ -38,4 +38,17 @@ describe('Test de références', () => {
             done();
         });
     });
+
+    it("Test pour retrouver le commentaire d'un user", (done) => {
+        User.findOne({name: 'John'}).populate({
+            path: 'blogBooks',
+            populate: {
+                path: 'comments',
+                model: 'Comment'
+            }
+        }).then((user) => {
+            assert(user.blogBooks[0].comments[0].content === 'Je suis un commentaire');
+            done();
+        });
+    });
 });
