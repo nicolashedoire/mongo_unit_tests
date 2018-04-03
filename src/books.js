@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const BookSchema = new Schema({
-    titre: String,
+    titre: {type: String, required:[true, 'Un titre est requis']},
     pagesCount: {type: Number, default: 0}
 });
 

@@ -23,8 +23,9 @@ beforeEach('On supprime les anciens livres', (done) => {
 
     // On drop la collection 
     books.drop().then(() => {
-
         // On passe à la suite
         done();
-    });
+    }).catch((err) => {
+        done();
+    })
 });
