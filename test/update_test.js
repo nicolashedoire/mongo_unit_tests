@@ -28,6 +28,11 @@ describe('Test update livre', () => {
       });
   }
 
+  it("update le titre à partir de l'instance", done => {
+    book.set('titre', newTitle);
+    assertTitle(book.save(), done);
+  });
+
   it('update le titre du livre', done => {
     assertTitle(Book.update({titre: 'Docker'}, {titre: newTitle}), done);
   });
