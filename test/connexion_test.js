@@ -17,15 +17,20 @@ before((done) => {
 
 
 beforeEach('On supprime les anciens livres', (done) => {
-
     // On va chercher la collection de livres
-    const books = mongoose.connection.collections.books;
+    const {books, users} = mongoose.connection.collections;
 
     // On drop la collection 
     books.drop().then(() => {
         // On passe à la suite
-        done();
+        users.drop().then(() => {
+            done();
+        }).catch((err) => {
+            // pass
+            done();
+        })
     }).catch((err) => {
+        // pass
         done();
     })
 });
